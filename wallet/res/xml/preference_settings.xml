@@ -26,12 +26,13 @@
 		android:title="@string/preferences_connectivity_notification_title" />
 
 	<EditTextPreference
+		android:defaultValue="192.168.1.100"
 		android:key="trusted_peer"
 		android:summary="@string/preferences_trusted_peer_summary"
 		android:title="@string/preferences_trusted_peer_title" />
 
 	<CheckBoxPreference
-		android:defaultValue="false"
+		android:defaultValue="true"
 		android:key="trusted_peer_only"
 		android:summary="@string/preferences_trusted_peer_only_summary"
 		android:title="@string/preferences_trusted_peer_only_title" />

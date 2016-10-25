@@ -416,7 +416,7 @@ public class BlockchainServiceImpl extends android.app.Service implements Blockc
 
 				peerGroup.addPeerDiscovery(new PeerDiscovery()
 				{
-					private final PeerDiscovery normalPeerDiscovery = MultiplexingDiscovery.forServices(Constants.NETWORK_PARAMETERS, 0);
+					//private final PeerDiscovery normalPeerDiscovery = MultiplexingDiscovery.forServices(Constants.NETWORK_PARAMETERS, 0);
 
 					@Override
 					public InetSocketAddress[] getPeers(final long services, final long timeoutValue, final TimeUnit timeoutUnit)
@@ -438,8 +438,8 @@ public class BlockchainServiceImpl extends android.app.Service implements Blockc
 							}
 						}
 
-						if (!connectTrustedPeerOnly)
-							peers.addAll(Arrays.asList(normalPeerDiscovery.getPeers(services, timeoutValue, timeoutUnit)));
+//						if (!connectTrustedPeerOnly)
+//							peers.addAll(Arrays.asList(normalPeerDiscovery.getPeers(services, timeoutValue, timeoutUnit)));
 
 						// workaround because PeerGroup will shuffle peers
 						if (needsTrimPeersWorkaround)
@@ -452,7 +452,7 @@ public class BlockchainServiceImpl extends android.app.Service implements Blockc
 					@Override
 					public void shutdown()
 					{
-						normalPeerDiscovery.shutdown();
+						/* normalPeerDiscovery.shutdown(); */
 					}
 				});
 
@@ -626,18 +626,19 @@ public class BlockchainServiceImpl extends android.app.Service implements Blockc
 
 			if (!blockChainFileExists && earliestKeyCreationTime > 0)
 			{
-				try
-				{
-					final Stopwatch watch = Stopwatch.createStarted();
-					final InputStream checkpointsInputStream = getAssets().open(Constants.Files.CHECKPOINTS_FILENAME);
-					CheckpointManager.checkpoint(Constants.NETWORK_PARAMETERS, checkpointsInputStream, blockStore, earliestKeyCreationTime);
-					watch.stop();
-					log.info("checkpoints loaded from '{}', took {}", Constants.Files.CHECKPOINTS_FILENAME, watch);
-				}
-				catch (final IOException x)
-				{
-					log.error("problem reading checkpoints, continuing without", x);
-				}
+//				try
+//				{
+//					final Stopwatch watch = Stopwatch.createStarted();
+//					final InputStream checkpointsInputStream = getAssets().open(Constants.Files.CHECKPOINTS_FILENAME);
+//					CheckpointManager.checkpoint(Constants.NETWORK_PARAMETERS, checkpointsInputStream, blockStore, earliestKeyCreationTime);
+//					watch.stop();
+//					log.info("checkpoints loaded from '{}', took {}", Constants.Files.CHECKPOINTS_FILENAME, watch);
+//				}
+//				catch (final IOException x)
+//				{
+//					log.error("problem reading checkpoints, continuing without", x);
+//				}
+				log.error("checkpoints disabled for regtest, continuing without");
 			}
 		}
 		catch (final BlockStoreException x)
